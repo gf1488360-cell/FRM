@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Farid Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f4f0;
+  --white: #ffffff;
+  --navy: #0d1b3e;
+  --navy2: #162350;
+  --navy3: #1e2f63;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --green: #10b981;
+  --red: #ef4444;
+  --border: #e2ddd5;
+  --muted: #8a8070;
+  --text: #1a1410;
+  --off: #f0ede8;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}html{overflow-x:hidden;max-width:100vw;}
+html,body{height:100%;overscroll-behavior:none;}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);color:var(--text);
+  max-width:430px;margin:0 auto;min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh;flex-direction:column;
+  width:100%;overflow-x:hidden;background:var(--bg);}
+.screen.active{display:flex;}
+
+/* ====== HOME ====== */
+.home-header{
+  background:var(--navy);
+  padding:56px 22px 36px;
+  position:relative;overflow:hidden;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.home-header::before{
+  content:'';position:absolute;top:-50px;right:-50px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(201,168,76,0.1);
+  z-index:1;overflow:hidden;
+}
+.app-logo{
+  font-family:'Playfair Display',serif;
+  font-size:36px;font-weight:800;color:white;
+  letter-spacing:-1px;margin-bottom:10px;
+  position:relative;z-index:2;
+}
+.app-logo span{color:var(--gold);}
+.app-tagline{
+  font-size:13px;color:rgba(255,255,255,0.6);
+  font-weight:400;letter-spacing:0.3px;
+  position:relative;z-index:2;line-height:1.5;
+  display:block;visibility:visible;opacity:1;
+}
+
+.home-summary{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  padding:20px;margin-top:0;
+}
+.summary-card{
+  background:var(--navy);border-radius:14px;padding:14px;
+  position:relative;overflow:hidden;
+}
+.summary-card::after{
+  content:'';position:absolute;bottom:-15px;right:-15px;
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+}
+.summary-label{font-size:10px;color:rgba(255,255,255,0.45);
+  font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+.summary-amount{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;color:white;line-height:1.1;
+}
+.summary-sub{font-size:10px;color:rgba(255,255,255,0.4);margin-top:3px;}
+.summary-card.accent .summary-amount{color:var(--gold);}
+
+.home-modules{padding:0 20px 100px;width:100%;box-sizing:border-box;overflow:hidden;}
+.modules-title{
+  font-size:11px;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:12px;margin-top:4px;
+}
+
+.module-card{
+  background:var(--navy);border-radius:18px;
+  padding:20px;margin-bottom:12px;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform 0.2s;
+  animation:cardIn 0.4s ease both;
+  width:100%;box-sizing:border-box;
+}
+.module-card:nth-child(1){animation-delay:0.05s;}
+.module-card:nth-child(2){animation-delay:0.1s;}
+.module-card:nth-child(3){animation-delay:0.15s;}
+.module-card:nth-child(4){animation-delay:0.2s;}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.module-card:active{transform:scale(0.97);}
+.module-card::after{
+  content:'';position:absolute;right:-25px;bottom:-25px;
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(255,255,255,0.03);
+  pointer-events:none;
+}
+.mc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.mc-icon{
+  width:44px;height:44px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.mc-lock{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);
+  display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.mc-num{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:4px;}
+.mc-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
+  color:white;margin-bottom:5px;line-height:1.1;}
+.mc-desc{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;font-weight:300;}
+.mc-bar{height:2px;background:rgba(255,255,255,0.08);border-radius:99px;margin-top:14px;overflow:hidden;}
+.mc-fill{height:100%;border-radius:99px;transition:width 0.8s ease;}
+
+/* ====== MODULE HEADER ====== */
+.mod-header{
+  background:var(--navy);
+  padding:46px 18px 18px;
+  display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:50;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,0.1);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:17px;color:white;flex-shrink:0;
+}
+.back-btn:active{background:rgba(255,255,255,0.2);}
+.mod-header-info{flex:1;}
+.mod-header-info h2{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:700;color:white;line-height:1.1;
+}
+.mod-header-info p{font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;}
+
+/* ====== MONTH BANNER ====== */
+.month-banner{
+  background:var(--navy);
+  padding:0 18px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.month-name-big{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:800;color:white;
+}
+.month-total{text-align:right;}
+.month-total-label{font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:2px;}
+.month-total-amount{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;color:var(--gold);
+}
+
+/* ====== MODULE BODY ====== */
+.mod-body{flex:1;padding:16px 18px 100px;}
+
+/* ====== ADD RECORD FORM ====== */
+.add-form{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:16px;margin-bottom:16px;
+}
+.add-form-title{
+  font-size:12px;font-weight:700;color:var(--navy);
+  text-transform:uppercase;letter-spacing:0.8px;
+  margin-bottom:12px;display:flex;align-items:center;gap:6px;
+}
+.form-row{display:flex;gap:8px;margin-bottom:10px;}
+.f-input{
+  background:var(--off);border:1.5px solid var(--border);
+  border-radius:10px;padding:9px 12px;
+  font-size:13px;color:var(--text);
+  font-family:'Plus Jakarta Sans',sans-serif;outline:none;
+  transition:border-color 0.2s;width:100%;
+}
+.f-input:focus{border-color:var(--navy);}
+.f-input::placeholder{color:var(--muted);}
+select.f-input{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8070'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  padding-right:28px;
+}
+select.f-input option{background:white;}
+.add-rec-btn{
+  width:100%;padding:11px;border-radius:10px;
+  background:var(--navy);color:white;border:none;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:opacity 0.2s;
+}
+.add-rec-btn:active{opacity:0.8;}
+.char-count{font-size:10px;color:var(--muted);text-align:right;margin-top:2px;}
+
+/* ====== TODAY RECORDS ====== */
+.section-label{
+  font-size:11px;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:1px;
+  margin-bottom:10px;margin-top:4px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.today-total{
+  background:var(--navy);border-radius:12px;
+  padding:12px 14px;margin-bottom:12px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.today-date{font-size:12px;color:rgba(255,255,255,0.6);font-weight:500;}
+.today-amount{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;color:var(--gold);
+}
+
+/* RECORD ITEM */
+.rec-item{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:13px;padding:12px 14px;margin-bottom:8px;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.rec-cat-badge{
+  padding:3px 9px;border-radius:99px;
+  font-size:10px;font-weight:700;
+  background:var(--navy);color:white;
+  white-space:nowrap;flex-shrink:0;margin-top:1px;
+}
+.rec-body{flex:1;}
+.rec-amount{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;color:var(--navy);
+  margin-bottom:2px;
+}
+.rec-desc{font-size:11px;color:var(--muted);line-height:1.4;}
+.rec-actions{display:flex;gap:5px;flex-shrink:0;}
+.rec-btn{
+  width:28px;height:28px;border-radius:8px;border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:12px;transition:opacity 0.2s;
+}
+.rec-btn:active{opacity:0.7;}
+.rec-edit{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;}
+.rec-del{background:#fef2f2;color:#ef4444;border:1px solid #fecaca;}
+
+/* DAY RECORD CARD (saved days) */
+.day-card{
+  background:var(--navy);border-radius:14px;
+  padding:14px 16px;margin-bottom:10px;cursor:pointer;
+  transition:transform 0.2s;
+}
+.day-card:active{transform:scale(0.98);}
+.day-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.day-date{font-size:13px;font-weight:600;color:rgba(255,255,255,0.9);}
+.day-amount{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;color:var(--gold);
+}
+.day-descs{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;}
+
+/* MONTH RECORD CARD */
+.month-card{
+  background:var(--navy);border-radius:14px;
+  padding:16px;margin-bottom:10px;cursor:pointer;
+  transition:transform 0.2s;
+}
+.month-card:active{transform:scale(0.98);}
+.month-card-top{display:flex;align-items:center;justify-content:space-between;}
+.month-card-name{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;color:white;
+}
+.month-card-year{font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;}
+.month-card-amount{text-align:right;}
+.month-card-total{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;color:var(--gold);
+}
+.month-card-days{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;}
+
+/* ====== RECEIVED / RECEIVABLES ====== */
+.rx-form{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:16px;padding:16px;margin-bottom:16px;
+}
+.rx-item{
+  background:var(--navy);border-radius:14px;
+  padding:14px 16px;margin-bottom:10px;
+}
+.rx-item-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;}
+.rx-name{font-size:14px;font-weight:700;color:white;}
+.rx-amount{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;color:var(--gold);
+}
+.rx-meta{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;}
+.rx-edit-btn{
+  padding:5px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);
+  font-size:11px;font-weight:600;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;margin-top:8px;
+}
+
+/* RECEIVABLE HISTORY */
+.rx-history{
+  background:rgba(255,255,255,0.05);border-radius:8px;
+  padding:8px 10px;margin-top:8px;
+}
+.rx-history-title{font-size:10px;color:rgba(255,255,255,0.3);
+  text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+.rx-history-item{
+  font-size:11px;color:rgba(255,255,255,0.55);
+  padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  line-height:1.5;
+}
+.rx-history-item:last-child{border:none;}
+
+/* ====== PIN SCREEN ====== */
+.pin-overlay{
+  position:fixed;inset:0;background:var(--navy);
+  z-index:500;display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:32px;
+}
+.pin-overlay.open{display:flex;}
+.pin-logo{
+  font-family:'Playfair Display',serif;
+  font-size:26px;font-weight:800;color:white;margin-bottom:6px;
+}
+.pin-logo span{color:var(--gold);}
+.pin-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:36px;text-align:center;}
+.pin-dots{display:flex;gap:14px;margin-bottom:28px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;
+  border:2px solid rgba(255,255,255,0.2);background:transparent;transition:all 0.2s;}
+.pin-dot.filled{background:var(--gold);border-color:var(--gold);}
+.pin-dot.error{background:var(--red);border-color:var(--red);}
+.pin-error{font-size:12px;color:var(--red);margin-bottom:14px;min-height:18px;}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:260px;}
+.pin-key{
+  aspect-ratio:1;border-radius:14px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  color:white;font-size:22px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;font-family:'Playfair Display',serif;
+}
+.pin-key:active{background:rgba(201,168,76,0.25);border-color:var(--gold);}
+.pin-cancel{
+  margin-top:22px;padding:10px 24px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;color:rgba(255,255,255,0.55);
+  font-size:13px;cursor:pointer;
+}
+
+/* ====== MODALS ====== */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.55);
+  z-index:400;display:none;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--white);border-radius:22px 22px 0 0;
+  width:100%;max-width:430px;padding:22px 18px 36px;
+  animation:slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px;
+}
+.modal-input{
+  width:100%;background:var(--off);border:1.5px solid var(--border);
+  border-radius:11px;padding:10px 13px;font-size:13px;
+  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;
+  outline:none;margin-bottom:10px;transition:border-color 0.2s;
+}
+.modal-input:focus{border-color:var(--navy);}
+.modal-row{display:flex;gap:8px;margin-bottom:10px;}
+.modal-select{
+  flex:1;background:var(--off);border:1.5px solid var(--border);
+  border-radius:11px;padding:10px 12px;font-size:12px;
+  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none;
+  appearance:none;
+}
+.modal-btn{
+  width:100%;padding:13px;border-radius:11px;
+  background:var(--navy);color:white;border:none;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;
+}
+.modal-btn:active{opacity:0.8;}
+.modal-cancel{
+  width:100%;padding:11px;border-radius:11px;
+  background:var(--off);color:var(--muted);border:none;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:8px;
+}
+
+/* CONFIRM */
+.confirm-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  z-index:600;display:none;align-items:center;justify-content:center;padding:24px;
+  backdrop-filter:blur(6px);
+}
+.confirm-overlay.open{display:flex;}
+.confirm-box{
+  background:var(--white);border-radius:18px;
+  width:100%;max-width:320px;padding:24px;text-align:center;
+  animation:popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+.confirm-icon{font-size:36px;margin-bottom:10px;}
+.confirm-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.confirm-msg{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5;}
+.confirm-btns{display:flex;gap:8px;}
+.confirm-no{flex:1;padding:11px;border-radius:10px;background:var(--off);color:var(--muted);border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.confirm-yes{flex:1;padding:11px;border-radius:10px;background:var(--red);color:white;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:36px 20px;}
+.empty-icon{font-size:40px;margin-bottom:10px;}
+.empty-state p{font-size:13px;color:var(--muted);}
+
+/* NOTIF */
+.nw{position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:90%;max-width:380px;z-index:9999;pointer-events:none;}
+.notif{
+  background:var(--navy);border-radius:12px;padding:11px 14px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.2);
+  transform:translateY(-80px);opacity:0;
+  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events:all;margin-bottom:8px;
+}
+.notif.show{transform:translateY(0);opacity:1;}
+.notif-t{font-size:12px;font-weight:600;color:var(--gold);}
+.notif-b{font-size:11px;color:rgba(255,255,255,0.5);}
+
+/* DAY DETAIL SCREEN */
+.day-detail-header{background:var(--navy);padding:46px 18px 18px;}
+.day-detail-date{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:800;color:white;margin-bottom:4px;
+}
+.day-detail-total{font-size:14px;color:var(--gold);font-weight:600;}
+
+/* MISC */
+.divider{height:1px;background:var(--border);margin:14px 0;}
+.badge-green{background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;
+  padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;}
+.badge-amber{background:#fffbeb;color:#d97706;border:1px solid #fde68a;
+  padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="nw" id="nw"></div>
+
+<!-- ====== PIN OVERLAY ====== -->
+<div class="pin-overlay" id="pinOverlay">
+  <div class="pin-logo">Farid<span>Finance</span></div>
+  <div class="pin-sub" id="pinSub">Enter PIN to access this module</div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+    <div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="pin-error" id="pinError"></div>
+  <div class="pin-pad">
+    <div class="pin-key" onclick="pinPress('1')">1</div>
+    <div class="pin-key" onclick="pinPress('2')">2</div>
+    <div class="pin-key" onclick="pinPress('3')">3</div>
+    <div class="pin-key" onclick="pinPress('4')">4</div>
+    <div class="pin-key" onclick="pinPress('5')">5</div>
+    <div class="pin-key" onclick="pinPress('6')">6</div>
+    <div class="pin-key" onclick="pinPress('7')">7</div>
+    <div class="pin-key" onclick="pinPress('8')">8</div>
+    <div class="pin-key" onclick="pinPress('9')">9</div>
+    <div class="pin-key" style="font-size:16px;" onclick="pinClear()">⌫</div>
+    <div class="pin-key" onclick="pinPress('0')">0</div>
+    <div class="pin-key" style="font-size:16px;" onclick="pinSubmit()">✓</div>
+  </div>
+  <button class="pin-cancel" onclick="closePinOverlay()">Cancel</button>
+</div>
+
+<!-- ====== CONFIRM ====== -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑️</div>
+    <div class="confirm-title">Delete Record?</div>
+    <div class="confirm-msg" id="confirmMsg">This will permanently delete this record.</div>
+    <div class="confirm-btns">
+      <button class="confirm-no" onclick="closeConfirm()">Cancel</button>
+      <button class="confirm-yes" onclick="doConfirm()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== HOME SCREEN ====== -->
+<div class="screen active" id="homeScreen" style="overflow-x:hidden;">
+  <div style="background:#0d1b3e;padding:56px 22px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;overflow:visible;min-height:160px;">
+    <div style="position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(201,168,76,0.1);z-index:1;pointer-events:none;"></div>
+    <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:#ffffff;letter-spacing:-1px;margin-bottom:12px;position:relative;z-index:2;display:block;">Farid<span style="color:#c9a84c;">Finance</span></div>
+    <div style="font-size:14px;color:#aab4c8;font-weight:400;position:relative;z-index:2;display:block;width:100%;padding:0 10px;">Farid's Personal Finance Record Manager</div>
+  </div>
+  <div class="home-modules">
+    <div class="modules-title">Modules</div>
+    <div class="module-card" onclick="openModule(1)">
+      <div class="mc-top">
+        <div class="mc-icon" style="background:rgba(16,185,129,0.15);">📝</div>
+      </div>
+      <div class="mc-num">Module 01</div>
+      <div class="mc-name">Daily Record</div>
+      <div class="mc-desc">Track daily expenses by category with descriptions</div>
+      <div class="mc-bar"><div class="mc-fill" id="m1fill" style="width:0%;background:#10b981;"></div></div>
+    </div>
+    <div class="module-card" onclick="openModule(2)">
+      <div class="mc-top">
+        <div class="mc-icon" style="background:rgba(201,168,76,0.15);">📊</div>
+        <div class="mc-lock">🔒</div>
+      </div>
+      <div class="mc-num">Module 02</div>
+      <div class="mc-name">Monthly Record</div>
+      <div class="mc-desc">View spending history month by month</div>
+      <div class="mc-bar"><div class="mc-fill" id="m2fill" style="width:0%;background:var(--gold);"></div></div>
+    </div>
+    <div class="module-card" onclick="openModule(3)">
+      <div class="mc-top">
+        <div class="mc-icon" style="background:rgba(56,189,248,0.15);">💰</div>
+        <div class="mc-lock">🔒</div>
+      </div>
+      <div class="mc-num">Module 03</div>
+      <div class="mc-name">Received</div>
+      <div class="mc-desc">Record amounts received from others</div>
+      <div class="mc-bar"><div class="mc-fill" id="m3fill" style="width:0%;background:#38bdf8;"></div></div>
+    </div>
+    <div class="module-card" onclick="openModule(4)">
+      <div class="mc-top">
+        <div class="mc-icon" style="background:rgba(239,68,68,0.15);">🤝</div>
+        <div class="mc-lock">🔒</div>
+      </div>
+      <div class="mc-num">Module 04</div>
+      <div class="mc-name">Receivables</div>
+      <div class="mc-desc">Track amounts owed to you by others</div>
+      <div class="mc-bar"><div class="mc-fill" id="m4fill" style="width:0%;background:#ef4444;"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODULE 1: DAILY RECORD ====== -->
+<div class="screen" id="m1Screen">
+  <div class="mod-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="mod-header-info">
+      <h2>Daily Record</h2>
+      <p id="m1HeaderSub">Today's expenses</p>
+    </div>
+  </div>
+  <div class="month-banner">
+    <div class="month-name-big" id="m1MonthName"></div>
+    <div class="month-total">
+      <div class="month-total-label">Month Total</div>
+      <div class="month-total-amount" id="m1MonthTotal">PKR 0</div>
+    </div>
+  </div>
+  <div class="mod-body">
+    <!-- Add Record Form -->
+    <div class="add-form">
+      <div class="add-form-title">📝 Add Today's Expense</div>
+      <select class="f-input" id="recCat" style="margin-bottom:10px;">
+        <option value="">Select Category...</option>
+        <option value="🏠 Rent">🏠 Rent / Room</option>
+        <option value="🍳 Cooking">🍳 Cooking / Gas</option>
+        <option value="🍽️ Food">🍽️ Food / Dining</option>
+        <option value="🏡 Home">🏡 Home Supplies</option>
+        <option value="🧴 Personal Care">🧴 Personal Care</option>
+        <option value="👔 Dressing">👔 Dressing / Clothes</option>
+        <option value="🚌 Transport">🚌 Transport / Fuel</option>
+        <option value="📱 Mobile">📱 Mobile / Internet</option>
+        <option value="📚 Education">📚 Education / Books</option>
+        <option value="💊 Health">💊 Health / Medicine</option>
+        <option value="⚡ Utilities">⚡ Utilities / Bills</option>
+        <option value="🎉 Entertainment">🎉 Entertainment</option>
+        <option value="🤝 Social">🤝 Social / Gifts</option>
+        <option value="💼 Business">💼 Business Expense</option>
+        <option value="📦 Other">📦 Other</option>
+      </select>
+      <div class="form-row">
+        <input class="f-input" id="recAmount" type="number" placeholder="Amount (PKR)" style="flex:1;">
+      </div>
+      <input class="f-input" id="recDesc" placeholder="Description (max 50 chars)" maxlength="50" oninput="updateCharCount()" style="margin-bottom:2px;">
+      <div class="char-count"><span id="charCount">0</span>/50</div>
+      <button class="add-rec-btn" onclick="addRecord()" style="margin-top:8px;">+ Add Expense</button>
+    </div>
+
+    <!-- Today's Records -->
+    <div class="section-label">
+      <span id="todayLabel">TODAY</span>
+      <span id="todayTotalLabel" style="color:var(--navy);font-family:'Playfair Display',serif;font-size:14px;"></span>
+    </div>
+    <div id="todayRecords"></div>
+
+    <div class="divider"></div>
+
+    <!-- Past Days This Month -->
+    <div class="section-label">THIS MONTH — PAST DAYS</div>
+    <div id="pastDays"></div>
+  </div>
+</div>
+
+<!-- ====== MODULE 2: MONTHLY RECORD ====== -->
+<div class="screen" id="m2Screen">
+  <div class="mod-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="mod-header-info">
+      <h2>Monthly Record</h2>
+      <p>Read-only historical data</p>
+    </div>
+  </div>
+  <div class="mod-body">
+    <!-- Current month card -->
+    <div class="section-label">CURRENT MONTH</div>
+    <div class="month-card" id="currentMonthCard" onclick="openMonthDetail('current')">
+      <div class="month-card-top">
+        <div>
+          <div class="month-card-name" id="m2CurrentName"></div>
+          <div class="month-card-year" id="m2CurrentYear"></div>
+        </div>
+        <div class="month-card-amount">
+          <div class="month-card-total" id="m2CurrentTotal">PKR 0</div>
+          <div class="month-card-days" id="m2CurrentDays">0 days recorded</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-label">PREVIOUS MONTHS</div>
+    <div id="prevMonthsList"></div>
+  </div>
+</div>
+
+<!-- ====== MONTH DETAIL SCREEN ====== -->
+<div class="screen" id="monthDetailScreen">
+  <div class="mod-header">
+    <button class="back-btn" onclick="showScreen('m2Screen')">←</button>
+    <div class="mod-header-info">
+      <h2 id="monthDetailTitle">Month Detail</h2>
+      <p>Daily breakdown — Read only</p>
+    </div>
+  </div>
+  <div class="mod-body" id="monthDetailBody"></div>
+</div>
+
+<!-- ====== MODULE 3: RECEIVED ====== -->
+<div class="screen" id="m3Screen">
+  <div class="mod-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="mod-header-info">
+      <h2>Received</h2>
+      <p>Amounts received from others</p>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="rx-form">
+      <div class="add-form-title">💰 Record Received Amount</div>
+      <div class="form-row">
+        <input class="f-input" id="rxName" placeholder="Person's Name" style="flex:1;">
+        <input class="f-input" id="rxAmount" type="number" placeholder="Amount PKR" style="flex:1;">
+      </div>
+      <input class="f-input" id="rxDesc" placeholder="Description..." maxlength="80" style="margin-bottom:10px;">
+      <button class="add-rec-btn" onclick="addReceived()">+ Add Record</button>
+    </div>
+    <div class="section-label">ALL RECEIVED RECORDS</div>
+    <div id="receivedList"></div>
+  </div>
+</div>
+
+<!-- ====== MODULE 4: RECEIVABLES ====== -->
+<div class="screen" id="m4Screen">
+  <div class="mod-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="mod-header-info">
+      <h2>Receivables</h2>
+      <p>Amounts owed to you</p>
+    </div>
+  </div>
+  <div class="mod-body">
+    <div class="rx-form">
+      <div class="add-form-title">🤝 Add Receivable</div>
+      <div class="form-row">
+        <input class="f-input" id="rvName" placeholder="Person's Name" style="flex:1;">
+        <input class="f-input" id="rvAmount" type="number" placeholder="Amount PKR" style="flex:1;">
+      </div>
+      <input class="f-input" id="rvDesc" placeholder="Description..." maxlength="80" style="margin-bottom:10px;">
+      <button class="add-rec-btn" onclick="addReceivable()">+ Add Receivable</button>
+    </div>
+    <!-- Summary -->
+    <div class="today-total" style="margin-bottom:14px;">
+      <div class="today-date">Total Pending</div>
+      <div class="today-amount" id="rvTotal">PKR 0</div>
+    </div>
+    <div class="section-label">ALL RECEIVABLES</div>
+    <div id="receivablesList"></div>
+  </div>
+</div>
+
+<!-- ====== EDIT MODALS ====== -->
+<!-- Edit Today Record -->
+<div class="modal-overlay" id="editRecModal">
+  <div class="modal-box">
+    <div class="modal-title">✏️ Edit Record</div>
+    <select class="modal-input" id="editRecCat">
+      <option value="🏠 Rent">🏠 Rent / Room</option>
+      <option value="🍳 Cooking">🍳 Cooking / Gas</option>
+      <option value="🍽️ Food">🍽️ Food / Dining</option>
+      <option value="🏡 Home">🏡 Home Supplies</option>
+      <option value="🧴 Personal Care">🧴 Personal Care</option>
+      <option value="👔 Dressing">👔 Dressing / Clothes</option>
+      <option value="🚌 Transport">🚌 Transport / Fuel</option>
+      <option value="📱 Mobile">📱 Mobile / Internet</option>
+      <option value="📚 Education">📚 Education / Books</option>
+      <option value="💊 Health">💊 Health / Medicine</option>
+      <option value="⚡ Utilities">⚡ Utilities / Bills</option>
+      <option value="🎉 Entertainment">🎉 Entertainment</option>
+      <option value="🤝 Social">🤝 Social / Gifts</option>
+      <option value="💼 Business">💼 Business Expense</option>
+      <option value="📦 Other">📦 Other</option>
+    </select>
+    <input class="modal-input" id="editRecAmount" type="number" placeholder="Amount PKR">
+    <input class="modal-input" id="editRecDesc" placeholder="Description" maxlength="50">
+    <button class="modal-btn" onclick="saveEditRecord()">Save Changes</button>
+    <button class="modal-cancel" onclick="closeModal('editRecModal')">Cancel</button>
+  </div>
+</div>
+
+<!-- Edit Received -->
+<div class="modal-overlay" id="editRxModal">
+  <div class="modal-box">
+    <div class="modal-title">✏️ Edit Received</div>
+    <input class="modal-input" id="editRxName" placeholder="Person's Name">
+    <input class="modal-input" id="editRxAmount" type="number" placeholder="Amount PKR">
+    <input class="modal-input" id="editRxDesc" placeholder="Description" maxlength="80">
+    <button class="modal-btn" onclick="saveEditReceived()">Save Changes</button>
+    <button class="modal-cancel" onclick="closeModal('editRxModal')">Cancel</button>
+  </div>
+</div>
+
+<!-- Update Receivable -->
+<div class="modal-overlay" id="updateRvModal">
+  <div class="modal-box">
+    <div class="modal-title">🔄 Update Receivable</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;" id="updateRvInfo"></div>
+    <input class="modal-input" id="updateRvNote" placeholder="Update note (e.g. partial payment received)..." maxlength="80">
+    <input class="modal-input" id="updateRvNewAmt" type="number" placeholder="New remaining amount PKR">
+    <button class="modal-btn" onclick="saveUpdateReceivable()">Update Record</button>
+    <button class="modal-cancel" onclick="closeModal('updateRvModal')">Cancel</button>
+  </div>
+</div>
+
+<script>
+// ====== STATE ======
+const PIN = '7855';
+let pinBuffer = '';
+let pinTarget = null;
+let pendingDeleteFn = null;
+let editingRecId = null;
+let editingRxId = null;
+let editingRvId = null;
+let viewingMonth = null;
+
+// DATA
+let todayRecords   = JSON.parse(localStorage.getItem('ff_today') || '[]');
+let pastDays       = JSON.parse(localStorage.getItem('ff_pastDays') || '[]');
+let monthHistory   = JSON.parse(localStorage.getItem('ff_months') || '[]');
+let received       = JSON.parse(localStorage.getItem('ff_received') || '[]');
+let receivables    = JSON.parse(localStorage.getItem('ff_receivables') || '[]');
+let lastDate       = localStorage.getItem('ff_lastDate') || '';
+
+// ====== SAVE ======
+function save() {
+  localStorage.setItem('ff_today', JSON.stringify(todayRecords));
+  localStorage.setItem('ff_pastDays', JSON.stringify(pastDays));
+  localStorage.setItem('ff_months', JSON.stringify(monthHistory));
+  localStorage.setItem('ff_received', JSON.stringify(received));
+  localStorage.setItem('ff_receivables', JSON.stringify(receivables));
+  localStorage.setItem('ff_lastDate', lastDate);
+}
+
+// ====== INIT ======
+function init() {
+  checkDayRollover();
+  checkMonthRollover();
+  renderHome();
+  renderM1();
+  renderM2();
+  renderM3();
+  renderM4();
+}
+
+function checkDayRollover() {
+  const today = todayStr();
+  if (lastDate && lastDate !== today && todayRecords.length > 0) {
+    // Save yesterday's records as a past day
+    const dayTotal = todayRecords.reduce((s,r) => s + r.amount, 0);
+    const descs = todayRecords.map(r => r.desc).filter(Boolean).join(', ');
+    pastDays.unshift({
+      date: lastDate,
+      total: dayTotal,
+      descs: descs,
+      records: [...todayRecords]
+    });
+    todayRecords = [];
+    lastDate = today;
+    save();
+  } else if (!lastDate) {
+    lastDate = today;
+    save();
+  }
+}
+
+function checkMonthRollover() {
+  // Check if there are pastDays from a previous month
+  const now = new Date();
+  const currentMonthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+  // Find any pastDays not from this month
+  const thisMonthDays = [];
+  const otherDays = [];
+
+  for (const d of pastDays) {
+    const dKey = d.date.substring(0,7);
+    if (dKey === currentMonthKey) thisMonthDays.push(d);
+    else otherDays.push(d);
+  }
+
+  if (otherDays.length > 0) {
+    // Group other days by month and archive them
+    const byMonth = {};
+    for (const d of otherDays) {
+      const mk = d.date.substring(0,7);
+      if (!byMonth[mk]) byMonth[mk] = [];
+      byMonth[mk].push(d);
+    }
+    for (const [mk, days] of Object.entries(byMonth)) {
+      const existing = monthHistory.find(m => m.monthKey === mk);
+      if (!existing) {
+        const total = days.reduce((s,d) => s+d.total, 0);
+        const [yr, mo] = mk.split('-');
+        monthHistory.unshift({
+          monthKey: mk,
+          monthName: new Date(parseInt(yr), parseInt(mo)-1, 1).toLocaleString('en-US',{month:'long'}),
+          year: yr,
+          total,
+          days: days.sort((a,b) => a.date.localeCompare(b.date))
+        });
+      }
+    }
+    pastDays = thisMonthDays;
+    save();
+  }
+}
+
+// ====== NAV ======
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goHome() { renderHome(); showScreen('homeScreen'); }
+
+function openModule(n) {
+  if (n === 1) { renderM1(); showScreen('m1Screen'); return; }
+  if (n === 2) { openWithPin('m2Screen'); return; }
+  if (n === 3) { openWithPin('m3Screen'); return; }
+  if (n === 4) { openWithPin('m4Screen'); return; }
+}
+
+// ====== PIN ======
+function openWithPin(target) {
+  pinTarget = target;
+  pinBuffer = '';
+  updatePinDots();
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinOverlay').classList.add('open');
+}
+
+function closePinOverlay() {
+  document.getElementById('pinOverlay').classList.remove('open');
+  pinTarget = null; pinBuffer = '';
+}
+
+function pinPress(v) {
+  if (pinBuffer.length >= 4) return;
+  pinBuffer += v;
+  updatePinDots();
+  if (pinBuffer.length === 4) setTimeout(pinSubmit, 200);
+}
+
+function pinClear() {
+  pinBuffer = pinBuffer.slice(0,-1);
+  updatePinDots();
+}
+
+function pinSubmit() {
+  if (pinBuffer === PIN) {
+    document.getElementById('pinOverlay').classList.remove('open');
+    if (pinTarget === 'm2Screen') { renderM2(); showScreen('m2Screen'); }
+    else if (pinTarget === 'm3Screen') { renderM3(); showScreen('m3Screen'); }
+    else if (pinTarget === 'm4Screen') { renderM4(); showScreen('m4Screen'); }
+    pinTarget = null; pinBuffer = '';
+  } else {
+    document.querySelectorAll('.pin-dot').forEach(d => d.classList.add('error'));
+    document.getElementById('pinError').textContent = 'Incorrect PIN. Try again.';
+    setTimeout(() => { pinBuffer = ''; updatePinDots(); document.querySelectorAll('.pin-dot').forEach(d => d.classList.remove('error')); }, 800);
+  }
+}
+
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    const d = document.getElementById('pd'+i);
+    d.classList.remove('filled','error');
+    if (i < pinBuffer.length) d.classList.add('filled');
+  }
+}
+
+// ====== UTILS ======
+function todayStr() {
+  return new Date().toISOString().split('T')[0];
+}
+
+function fmtDate(str) {
+  const d = new Date(str+'T00:00:00');
+  return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+}
+
+function fmtAmt(n) {
+  return 'PKR ' + Number(n).toLocaleString();
+}
+
+function currentMonthKey() {
+  const n = new Date();
+  return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`;
+}
+
+function currentMonthName() {
+  return new Date().toLocaleString('en-US',{month:'long'});
+}
+
+function currentMonthTotal() {
+  const today = todayRecords.reduce((s,r) => s+r.amount, 0);
+  const past = pastDays.filter(d => d.date.startsWith(currentMonthKey())).reduce((s,d) => s+d.total, 0);
+  return today + past;
+}
+
+function updateCharCount() {
+  const v = document.getElementById('recDesc').value.length;
+  document.getElementById('charCount').textContent = v;
+}
+
+// ====== RENDER HOME ======
+function renderHome() {
+  const now = new Date();
+  const todayTotal = todayRecords.reduce((s,r) => s+r.amount, 0);
+  const monthTotal = currentMonthTotal();
+  const rvPending = receivables.reduce((s,r) => s + (r.amount||0), 0);
+
+  // Summary cards removed from home
+
+  // Bars
+  const maxDay = 5000, maxMonth = 50000;
+  document.getElementById('m1fill').style.width = Math.min(100, todayTotal/maxDay*100) + '%';
+  document.getElementById('m2fill').style.width = Math.min(100, monthTotal/maxMonth*100) + '%';
+  document.getElementById('m3fill').style.width = Math.min(100, received.length*10) + '%';
+  document.getElementById('m4fill').style.width = Math.min(100, rvPending/maxMonth*100) + '%';
+}
+
+// ====== MODULE 1: DAILY RECORD ======
+function addRecord() {
+  const cat = document.getElementById('recCat').value;
+  const amt = parseFloat(document.getElementById('recAmount').value);
+  const desc = document.getElementById('recDesc').value.trim();
+  if (!cat) { showNotif('⚠️','Select Category','Please select a category'); return; }
+  if (!amt || amt <= 0) { showNotif('⚠️','Invalid Amount','Enter a valid amount'); return; }
+
+  const rec = { id: Date.now(), cat, amount: amt, desc: desc || '', time: new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) };
+  todayRecords.push(rec);
+  save();
+
+  document.getElementById('recCat').value = '';
+  document.getElementById('recAmount').value = '';
+  document.getElementById('recDesc').value = '';
+  document.getElementById('charCount').textContent = '0';
+
+  renderM1(); renderHome();
+  showNotif('✅','Added',`${cat} — ${fmtAmt(amt)}`);
+}
+
+function delRecord(id) {
+  pendingDeleteFn = () => {
+    todayRecords = todayRecords.filter(r => r.id !== id);
+    save(); renderM1(); renderHome();
+    showNotif('🗑️','Deleted','Record removed');
+  };
+  document.getElementById('confirmMsg').textContent = 'Delete this expense record?';
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+
+function openEditRecord(id) {
+  const r = todayRecords.find(x => x.id === id);
+  if (!r) return;
+  editingRecId = id;
+  document.getElementById('editRecCat').value = r.cat;
+  document.getElementById('editRecAmount').value = r.amount;
+  document.getElementById('editRecDesc').value = r.desc;
+  openModal('editRecModal');
+}
+
+function saveEditRecord() {
+  const r = todayRecords.find(x => x.id === editingRecId);
+  if (!r) return;
+  r.cat = document.getElementById('editRecCat').value;
+  r.amount = parseFloat(document.getElementById('editRecAmount').value) || r.amount;
+  r.desc = document.getElementById('editRecDesc').value.trim();
+  save(); renderM1(); renderHome();
+  closeModal('editRecModal');
+  showNotif('✅','Updated','Record updated');
+}
+
+function renderM1() {
+  const now = new Date();
+  document.getElementById('m1MonthName').textContent = now.toLocaleString('en-US',{month:'long'}) + ' ' + now.getFullYear();
+  document.getElementById('m1MonthTotal').textContent = fmtAmt(currentMonthTotal());
+  document.getElementById('m1HeaderSub').textContent = now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+
+  // Today records
+  const todayTotal = todayRecords.reduce((s,r) => s+r.amount, 0);
+  document.getElementById('todayLabel').textContent = 'TODAY — ' + now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  document.getElementById('todayTotalLabel').textContent = fmtAmt(todayTotal);
+
+  const tEl = document.getElementById('todayRecords');
+  if (!todayRecords.length) {
+    tEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><p>No expenses yet today</p></div>';
+  } else {
+    tEl.innerHTML = todayRecords.map(r => `
+      <div class="rec-item">
+        <div class="rec-cat-badge">${r.cat}</div>
+        <div class="rec-body">
+          <div class="rec-amount">${fmtAmt(r.amount)}</div>
+          <div class="rec-desc">${r.desc || '—'} <span style="color:var(--border);font-size:10px;">${r.time||''}</span></div>
+        </div>
+        <div class="rec-actions">
+          <button class="rec-btn rec-edit" onclick="openEditRecord(${r.id})">✏️</button>
+          <button class="rec-btn rec-del" onclick="delRecord(${r.id})">🗑</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // Past days this month
+  const thisMonthDays = pastDays.filter(d => d.date.startsWith(currentMonthKey()));
+  const pEl = document.getElementById('pastDays');
+  if (!thisMonthDays.length) {
+    pEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📅</div><p>No past days this month</p></div>';
+  } else {
+    pEl.innerHTML = thisMonthDays.map(d => `
+      <div class="day-card">
+        <div class="day-card-top">
+          <div class="day-date">${fmtDate(d.date)}</div>
+          <div class="day-amount">${fmtAmt(d.total)}</div>
+        </div>
+        <div class="day-descs">${d.descs || 'No descriptions'}</div>
+      </div>`).join('');
+  }
+}
+
+// ====== MODULE 2: MONTHLY ======
+function renderM2() {
+  const now = new Date();
+  document.getElementById('m2CurrentName').textContent = currentMonthName();
+  document.getElementById('m2CurrentYear').textContent = now.getFullYear();
+  document.getElementById('m2CurrentTotal').textContent = fmtAmt(currentMonthTotal());
+  const daysCount = pastDays.filter(d => d.date.startsWith(currentMonthKey())).length + (todayRecords.length > 0 ? 1 : 0);
+  document.getElementById('m2CurrentDays').textContent = daysCount + ' days recorded';
+
+  const pEl = document.getElementById('prevMonthsList');
+  if (!monthHistory.length) {
+    pEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><p>No previous months yet</p></div>';
+    return;
+  }
+  pEl.innerHTML = monthHistory.map((m,i) => `
+    <div class="month-card" onclick="openMonthDetail(${i})">
+      <div class="month-card-top">
+        <div>
+          <div class="month-card-name">${m.monthName}</div>
+          <div class="month-card-year">${m.year}</div>
+        </div>
+        <div class="month-card-amount">
+          <div class="month-card-total">${fmtAmt(m.total)}</div>
+          <div class="month-card-days">${m.days.length} days recorded</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openMonthDetail(idx) {
+  let days, title;
+  if (idx === 'current') {
+    const now = new Date();
+    const todayTotal = todayRecords.reduce((s,r) => s+r.amount, 0);
+    const todayDay = { date: todayStr(), total: todayTotal, descs: todayRecords.map(r=>r.desc).filter(Boolean).join(', '), records: todayRecords };
+    days = [...pastDays.filter(d => d.date.startsWith(currentMonthKey()))];
+    if (todayRecords.length > 0) days.unshift(todayDay);
+    title = currentMonthName() + ' ' + now.getFullYear();
+  } else {
+    const m = monthHistory[idx];
+    days = m.days;
+    title = m.monthName + ' ' + m.year;
+  }
+
+  document.getElementById('monthDetailTitle').textContent = title;
+  const body = document.getElementById('monthDetailBody');
+
+  if (!days.length) {
+    body.innerHTML = '<div class="empty-state"><div class="empty-icon">📅</div><p>No records this month</p></div>';
+  } else {
+    body.innerHTML = days.map(d => `
+      <div class="day-card" style="margin-bottom:10px;">
+        <div class="day-card-top">
+          <div class="day-date">${fmtDate(d.date)}</div>
+          <div class="day-amount">${fmtAmt(d.total)}</div>
+        </div>
+        <div class="day-descs">${d.descs || '—'}</div>
+        ${d.records && d.records.length ? `
+          <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.08);padding-top:8px;display:flex;flex-direction:column;gap:5px;">
+            ${d.records.map(r => `
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:11px;color:rgba(255,255,255,0.55);">${r.cat} — ${r.desc||'—'}</span>
+                <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">${fmtAmt(r.amount)}</span>
+              </div>`).join('')}
+          </div>` : ''}
+      </div>`).join('');
+  }
+
+  showScreen('monthDetailScreen');
+}
+
+// ====== MODULE 3: RECEIVED ======
+function addReceived() {
+  const name = document.getElementById('rxName').value.trim();
+  const amt = parseFloat(document.getElementById('rxAmount').value);
+  const desc = document.getElementById('rxDesc').value.trim();
+  if (!name) { showNotif('⚠️','Missing','Enter person name'); return; }
+  if (!amt || amt <= 0) { showNotif('⚠️','Invalid','Enter valid amount'); return; }
+
+  received.unshift({ id: Date.now(), name, amount: amt, desc, date: todayStr() });
+  document.getElementById('rxName').value = '';
+  document.getElementById('rxAmount').value = '';
+  document.getElementById('rxDesc').value = '';
+  save(); renderM3(); renderHome();
+  showNotif('✅','Recorded',`Received ${fmtAmt(amt)} from ${name}`);
+}
+
+function openEditReceived(id) {
+  const r = received.find(x => x.id === id);
+  if (!r) return;
+  editingRxId = id;
+  document.getElementById('editRxName').value = r.name;
+  document.getElementById('editRxAmount').value = r.amount;
+  document.getElementById('editRxDesc').value = r.desc || '';
+  openModal('editRxModal');
+}
+
+function saveEditReceived() {
+  const r = received.find(x => x.id === editingRxId);
+  if (!r) return;
+  r.name = document.getElementById('editRxName').value.trim() || r.name;
+  r.amount = parseFloat(document.getElementById('editRxAmount').value) || r.amount;
+  r.desc = document.getElementById('editRxDesc').value.trim();
+  save(); renderM3();
+  closeModal('editRxModal');
+  showNotif('✅','Updated','Record updated');
+}
+
+function renderM3() {
+  const el = document.getElementById('receivedList');
+  if (!received.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-icon">💰</div><p>No received records yet</p></div>';
+    return;
+  }
+  el.innerHTML = received.map(r => `
+    <div class="rx-item">
+      <div class="rx-item-top">
+        <div class="rx-name">${r.name}</div>
+        <div class="rx-amount">${fmtAmt(r.amount)}</div>
+      </div>
+      <div class="rx-meta">${fmtDate(r.date)}${r.desc ? ' — ' + r.desc : ''}</div>
+      <button class="rx-edit-btn" onclick="openEditReceived(${r.id})">✏️ Edit</button>
+    </div>`).join('');
+}
+
+// ====== MODULE 4: RECEIVABLES ======
+function addReceivable() {
+  const name = document.getElementById('rvName').value.trim();
+  const amt = parseFloat(document.getElementById('rvAmount').value);
+  const desc = document.getElementById('rvDesc').value.trim();
+  if (!name) { showNotif('⚠️','Missing','Enter person name'); return; }
+  if (!amt || amt <= 0) { showNotif('⚠️','Invalid','Enter valid amount'); return; }
+
+  receivables.unshift({
+    id: Date.now(), name, amount: amt, desc, date: todayStr(),
+    history: [{ date: todayStr(), note: 'Added — ' + desc, amount: amt }]
+  });
+  document.getElementById('rvName').value = '';
+  document.getElementById('rvAmount').value = '';
+  document.getElementById('rvDesc').value = '';
+  save(); renderM4(); renderHome();
+  showNotif('✅','Added',`${fmtAmt(amt)} from ${name} recorded`);
+}
+
+function openUpdateReceivable(id) {
+  const r = receivables.find(x => x.id === id);
+  if (!r) return;
+  editingRvId = id;
+  document.getElementById('updateRvInfo').textContent = `${r.name} — Current: ${fmtAmt(r.amount)}`;
+  document.getElementById('updateRvNote').value = '';
+  document.getElementById('updateRvNewAmt').value = '';
+  openModal('updateRvModal');
+}
+
+function saveUpdateReceivable() {
+  const r = receivables.find(x => x.id === editingRvId);
+  if (!r) return;
+  const note = document.getElementById('updateRvNote').value.trim();
+  const newAmt = parseFloat(document.getElementById('updateRvNewAmt').value);
+  if (!note) { showNotif('⚠️','Missing','Enter update note'); return; }
+
+  r.history = r.history || [];
+  r.history.push({ date: todayStr(), note, amount: newAmt || r.amount });
+  if (newAmt >= 0) r.amount = newAmt;
+
+  save(); renderM4(); renderHome();
+  closeModal('updateRvModal');
+  showNotif('✅','Updated','Receivable record updated');
+}
+
+function renderM4() {
+  const total = receivables.reduce((s,r) => s+(r.amount||0), 0);
+  document.getElementById('rvTotal').textContent = fmtAmt(total);
+
+  const el = document.getElementById('receivablesList');
+  if (!receivables.length) {
+    el.innerHTML = '<div class="empty-state"><div class="empty-icon">🤝</div><p>No receivables yet</p></div>';
+    return;
+  }
+  el.innerHTML = receivables.map(r => `
+    <div class="rx-item">
+      <div class="rx-item-top">
+        <div class="rx-name">${r.name}</div>
+        <div class="rx-amount">${fmtAmt(r.amount)}</div>
+      </div>
+      <div class="rx-meta">${fmtDate(r.date)}${r.desc ? ' — ' + r.desc : ''}</div>
+      ${r.amount === 0 ? '<div style="margin-top:6px;"><span class="badge-green">✅ Settled</span></div>' : '<div style="margin-top:6px;"><span class="badge-amber">⏳ Pending</span></div>'}
+      ${r.history && r.history.length > 1 ? `
+        <div class="rx-history">
+          <div class="rx-history-title">Update History</div>
+          ${r.history.slice(1).map(h => `<div class="rx-history-item">📅 ${h.date} — ${h.note} → ${fmtAmt(h.amount)}</div>`).join('')}
+        </div>` : ''}
+      <button class="rx-edit-btn" onclick="openUpdateReceivable(${r.id})">🔄 Update Record</button>
+    </div>`).join('');
+}
+
+// ====== MODALS ======
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target === m) m.classList.remove('open'); });
+});
+
+// ====== CONFIRM ======
+function closeConfirm() { document.getElementById('confirmOverlay').classList.remove('open'); pendingDeleteFn = null; }
+function doConfirm() { if(pendingDeleteFn) pendingDeleteFn(); closeConfirm(); }
+document.getElementById('confirmOverlay').addEventListener('click', e => { if(e.target.id==='confirmOverlay') closeConfirm(); });
+
+// ====== NOTIF ======
+function showNotif(icon, title, body) {
+  const nw = document.getElementById('nw');
+  const id = 'n'+Date.now();
+  const d = document.createElement('div');
+  d.className='notif';d.id=id;
+  d.innerHTML=`<div style="font-size:18px">${icon}</div><div style="flex:1"><div class="notif-t">${title}</div><div class="notif-b">${body}</div></div>`;
+  nw.appendChild(d);
+  setTimeout(()=>d.classList.add('show'),10);
+  setTimeout(()=>{d.classList.remove('show');setTimeout(()=>d.remove(),400);},3500);
+}
+
+// ====== BOOT ======
+init();
+setInterval(() => { checkDayRollover(); checkMonthRollover(); }, 60000);
+</script>
+</body>
+</html>
